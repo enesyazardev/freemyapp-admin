@@ -1,0 +1,63 @@
+{
+	"name": "freemyapp-admin",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@reduxjs/toolkit": "^1.8.6",
+		"@testing-library/jest-dom": "^5.16.5",
+		"@testing-library/react": "^13.4.0",
+		"@testing-library/user-event": "^13.5.0",
+		"formik": "^2.2.9",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-loading": "^2.0.3",
+		"react-notifications-component": "^4.0.1",
+		"react-redux": "^8.0.4",
+		"react-router-dom": "^6.4.2",
+		"react-scripts": "5.0.1",
+		"web-vitals": "^2.1.4",
+		"yup": "^0.32.11"
+	},
+	"scripts": {
+		"start": "REACT_APP_ENV=development react-scripts start",
+		"build": "yarn run build:dev && yarn run build:prod",
+		"build:prod": "rm -rf buildprod && GENERATE_SOURCEMAP=false REACT_APP_ENV=production react-scripts build && mv build buildprod",
+		"build:dev": "rm -rf buildev && GENERATE_SOURCEMAP=false REACT_APP_ENV=staging react-scripts build && mv build buildev",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"lint": "eslint .",
+		"lint:fix": "eslint --fix --ext .js --ext .jsx ./src"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"main": "index.js",
+	"repository": "https://github.com/enesyazardev/freemyapp-admin.git",
+	"author": "Eray Kalkan <ery.kalkan19@outlook.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"eslint": "^8.26.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-react": "^7.31.10",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"prettier": "^2.7.1"
+	}
+}
