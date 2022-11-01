@@ -94,8 +94,18 @@ const Auth = () => {
 							</div>
 							{response?.isError ? (
 								<div
-									className='alert alert-danger mt-3 alert-dismissible fade show'
+									className='alert alert-danger alert-dismissible mt-3'
 									role='alert'>
+									<button
+										type='button'
+										className='close'
+										data-dismiss='alert'
+										aria-hidden='true'>
+										×
+									</button>
+									<h5>
+										<i className='icon fas fa-ban'></i> Alert!
+									</h5>
 									{response?.error?.data?.desc}
 								</div>
 							) : (

@@ -11,9 +11,7 @@ const Wrapper = ({ children }) => {
 			<div className='content-wrapper'>
 				{/* Content Header (Page header) */}
 				<div className='content-header'>
-					<div className='container-fluid'>
-						<div className='row mb-2'>{children}</div>
-					</div>
+					<div className='container-fluid'>{children}</div>
 				</div>
 			</div>
 			<Footer />
