@@ -1,5 +1,4 @@
 import { backendResponse } from '../constants';
-import i18n from '../languages';
 
 /**
  *
@@ -18,13 +17,13 @@ export default function responseError(response) {
 	});
 	if (error) {
 		return {
-			desc: i18n.t(error.desc),
+			desc: error.desc,
 			errorCode: error.errorCode,
 			httpStatus: error.httpStatus,
 		};
 	}
 	return {
-		desc: i18n.t('serviceToastMessage.responseError.otherError'),
+		desc: '',
 		errorCode: 0,
 		httpStatus: 0,
 	};
