@@ -32,11 +32,9 @@ const MoneyEdit = () => {
 				delete updateData.status;
 			}
 
-			if (values.status.includes('on')) {
+			if (values.status === 'true') {
 				updateData.status = true;
-			}
-
-			if (values.status.includes('off')) {
+			} else {
 				updateData.status = false;
 			}
 
@@ -52,7 +50,7 @@ const MoneyEdit = () => {
 	const formik = useFormik({
 		initialValues: {
 			title: data?.title ?? '',
-			status: data?.status === true ? ['on'] : ['off'],
+			status: data?.status === true ? 'true' : 'false',
 		},
 		enableReinitialize: true,
 		validationSchema: validations.money.create,
@@ -96,18 +94,15 @@ const MoneyEdit = () => {
 								</div>
 
 								<div className='form-group'>
-									<div className='custom-control custom-switch custom-switch-off-danger custom-switch-on-success'>
-										<input
-											type='checkbox'
-											className='custom-control-input'
-											id='status'
-											value={formik.values.status}
-											onChange={formik.handleChange}
-										/>
-										<label className='custom-control-label' htmlFor='status'>
-											Money Status (Disable/Enable)
-										</label>
-									</div>
+									<label>Status</label>
+									<select
+										onChange={formik.handleChange}
+										defaultValue={data?.status}
+										id='status'
+										className='form-control'>
+										<option value='true'>True</option>
+										<option value='false'>False</option>
+									</select>
 								</div>
 							</div>
 							{/* /.card-body */}

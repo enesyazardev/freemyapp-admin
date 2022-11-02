@@ -1,9 +1,23 @@
+import React from 'react';
+import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
 import Wrapper from '../../layouts/Wrapper';
 import { moneyServices } from '../../services';
 
 const MoneyList = () => {
 	const { data } = moneyServices.useMoneyListQuery();
+	const [query, setQuery] = React.useState('');
+	const [pageNumber, setPageNumber] = React.useState(0);
+
+	const moneyPerPage = 10;
+	const pagesVisited = pageNumber * moneyPerPage;
+
+	const pageCount = Math.ceil(data?.data.length / moneyPerPage);
+
+	const changePage = ({ selected }) => {
+		setPageNumber(selected);
+	};
+
 	return (
 		<Wrapper>
 			<div className='row'>
@@ -21,6 +35,7 @@ const MoneyList = () => {
 										name='table_search'
 										className='form-control float-right'
 										placeholder='Search'
+										onChange={(e) => setQuery(e.target.value)}
 									/>
 									<div className='input-group-append'>
 										<button type='submit' className='btn btn-default'>
@@ -43,34 +58,40 @@ const MoneyList = () => {
 								</thead>
 								<tbody>
 									{data?.data?.length > 0 ? (
-										data?.data?.map((d) => (
-											<tr key={d?._id}>
-												<td>{d?.money_id}</td>
-												<td>{d?.title}</td>
-												<td>
-													{d?.status === true ? (
-														<h5>
-															<span className='badge badge-pill badge-success'>
-																True
-															</span>
-														</h5>
-													) : (
-														<h5>
-															<span className='badge badge-pill badge-danger'>
-																False
-															</span>
-														</h5>
-													)}
-												</td>
-												<td>
-													<Link
-														to={`/money/edit/${d?.money_id}`}
-														className='btn btn-warning'>
-														Edit
-													</Link>
-												</td>
-											</tr>
-										))
+										data?.data
+											?.filter((money) =>
+												money.title.toLowerCase().includes(query.trim()),
+											)
+											.slice(pagesVisited, pagesVisited + moneyPerPage)
+
+											.map((d) => (
+												<tr key={d?._id}>
+													<td>{d?.money_id}</td>
+													<td>{d?.title}</td>
+													<td>
+														{d?.status === true ? (
+															<h5>
+																<span className='badge badge-pill badge-success'>
+																	True
+																</span>
+															</h5>
+														) : (
+															<h5>
+																<span className='badge badge-pill badge-danger'>
+																	False
+																</span>
+															</h5>
+														)}
+													</td>
+													<td>
+														<Link
+															to={`/money/edit/${d?.money_id}`}
+															className='btn btn-warning'>
+															Edit
+														</Link>
+													</td>
+												</tr>
+											))
 									) : (
 										<tr>
 											<td colSpan={3} align='center'>
@@ -81,7 +102,25 @@ const MoneyList = () => {
 								</tbody>
 							</table>
 							<div className='card-footer clearfix'>
-								<ul className='pagination pagination-sm m-0 float-right'>
+								<ReactPaginate
+									className='pagination pagination-sm m-0 float-right'
+									previousLabel='<'
+									nextLabel='>'
+									breakLabel='...'
+									pageCount={pageCount}
+									onPageChange={changePage}
+									containerClassName='pagination'
+									pageClassName='page-item'
+									pageLinkClassName='page-link'
+									previousClassName='page-item'
+									previousLinkClassName='page-link'
+									nextClassName='page-item'
+									nextLinkClassName='page-link'
+									breakClassName='page-item'
+									breakLinkClassName='page-link'
+									activeClassName='active'
+								/>
+								{/* <ul className='pagination pagination-sm m-0 float-right'>
 									<li className='page-item'>
 										<a className='page-link' href='#'>
 											«
@@ -107,7 +146,7 @@ const MoneyList = () => {
 											»
 										</a>
 									</li>
-								</ul>
+								</ul> */}
 							</div>
 						</div>
 						{/* /.card-body */}
