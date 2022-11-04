@@ -1,27 +1,27 @@
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../layouts/Wrapper';
-import { moneyServices } from '../../services';
+import { languageServices } from '../../services';
 
 import validations from '../../validations';
 
-const MoneyCreate = () => {
+const LanguageCreate = () => {
 	const navigate = useNavigate();
-	const { useMoneyCreateMutation } = moneyServices;
+	const { useLanguageCreateMutation } = languageServices;
 
-	const [moneyCreate] = useMoneyCreateMutation();
+	const [languageCreate] = useLanguageCreateMutation();
 
 	const formik = useFormik({
 		initialValues: {
 			title: '',
 		},
-		validationSchema: validations.money.create,
+		validationSchema: validations.language.create,
 		onSubmit: (values) => {
 			const obj = {
 				title: values.title,
 			};
-			moneyCreate(obj);
-			navigate('/money/list');
+			languageCreate(obj);
+			navigate('/language/list');
 		},
 	});
 
@@ -33,7 +33,7 @@ const MoneyCreate = () => {
 
 					<div className='card card-primary'>
 						<div className='card-header'>
-							<h3 className='card-title'>Money Create</h3>
+							<h3 className='card-title'>Language Create</h3>
 						</div>
 						{/* /.card-header */}
 						{/* form start */}
@@ -80,4 +80,4 @@ const MoneyCreate = () => {
 	);
 };
 
-export default MoneyCreate;
+export default LanguageCreate;

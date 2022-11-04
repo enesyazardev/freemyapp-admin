@@ -10,6 +10,9 @@ const AdminCreate = React.lazy(() => import('../pages/Admin/AdminCreate'));
 const MoneyList = React.lazy(() => import('../pages/Money/MoneyList'));
 const MoneyCreate = React.lazy(() => import('../pages/Money/MoneyCreate'));
 const MoneyEdit = React.lazy(() => import('../pages/Money/MoneyEdit'));
+const LanguageList = React.lazy(() => import('../pages/Language/LanguageList'));
+const LanguageCreate = React.lazy(() => import('../pages/Language/LanguageCreate'));
+const LanguageEdit = React.lazy(() => import('../pages/Language/LanguageEdit'));
 
 const Routing = () => {
 	return (
@@ -61,6 +64,30 @@ const Routing = () => {
 						element={
 							<Private>
 								<MoneyEdit />
+							</Private>
+						}
+					/>
+					<Route
+						path='language/list'
+						element={
+							<Private>
+								<LanguageList />
+							</Private>
+						}
+					/>
+					<Route
+						path='language/create'
+						element={
+							<Private>
+								<LanguageCreate />
+							</Private>
+						}
+					/>
+					<Route
+						path='language/edit/:id'
+						element={
+							<Private>
+								<LanguageEdit />
 							</Private>
 						}
 					/>

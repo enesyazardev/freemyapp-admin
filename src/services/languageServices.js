@@ -1,21 +1,21 @@
 import { baseApi, toast } from './index';
 import { responseError } from '../helpers';
 
-const moneyServices = baseApi.injectEndpoints({
+const languageServices = baseApi.injectEndpoints({
 	endpoints: (build) => ({
-		moneyList: build.query({
+		languageList: build.query({
 			query: () => ({
-				url: '/money/list',
+				url: '/language/list',
 				method: 'GET',
 			}),
 
 			transformResponse: baseApi.defaultTransformResponse,
-			providesTags: (result) => baseApi.providesTags(result, 'moneyGet'),
+			providesTags: (result) => baseApi.providesTags(result, 'languageGet'),
 		}),
 
-		moneyCreate: build.mutation({
+		languageCreate: build.mutation({
 			query: (body) => ({
-				url: '/admin/money/create',
+				url: '/admin/language/create',
 				method: 'POST',
 				body,
 			}),
@@ -23,31 +23,31 @@ const moneyServices = baseApi.injectEndpoints({
 			onQueryStarted(body, { queryFulfilled }) {
 				queryFulfilled.then(() => {
 					toast(
-						'Money Created is Successfully!',
-						'Money Created is Successfully!',
+						'Language Created is Successfully!',
+						'Language Created is Successfully!',
 						'success',
 					);
 				});
 
 				queryFulfilled.catch((error) => {
-					toast('Failed to Create Money!', responseError(error.error).desc, 'danger');
+					toast('Failed to Create Language!', responseError(error.error).desc, 'danger');
 				});
 			},
-			invalidatesTags: () => ['moneyGet'],
+			invalidatesTags: () => ['languageGet'],
 		}),
 
-		moneyGetById: build.query({
+		languageGetById: build.query({
 			query: (body) => ({
-				url: '/money/get',
+				url: '/language/get',
 				method: 'POST',
 				body,
 			}),
 			transformResponse: baseApi.defaultTransformResponse,
 		}),
 
-		moneyEdit: build.mutation({
+		languageEdit: build.mutation({
 			query: (body) => ({
-				url: '/admin/money/edit',
+				url: '/admin/language/edit',
 				method: 'POST',
 				body,
 			}),
@@ -57,18 +57,18 @@ const moneyServices = baseApi.injectEndpoints({
 				queryFulfilled.then(() => {
 					dispatch(baseApi.util.resetApiState());
 					toast(
-						'Money Updated is Successfully!',
-						'Money Updated is Successfully!',
+						'Language Updated is Successfully!',
+						'Language Updated is Successfully!',
 						'success',
 					);
 				});
 
 				queryFulfilled.catch((error) => {
-					toast('Failed to Update Money!', responseError(error.error).desc, 'danger');
+					toast('Failed to Update Language!', responseError(error.error).desc, 'danger');
 				});
 			},
-			invalidatesTags: () => ['moneyGet'],
+			invalidatesTags: () => ['languageGet'],
 		}),
 	}),
 });
-export default moneyServices;
+export default languageServices;

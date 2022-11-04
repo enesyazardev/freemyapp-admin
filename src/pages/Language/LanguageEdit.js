@@ -2,25 +2,25 @@ import { useFormik } from 'formik';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Wrapper from '../../layouts/Wrapper';
-import { moneyServices } from '../../services';
+import { languageServices } from '../../services';
 
 import validations from '../../validations';
 
-const MoneyEdit = () => {
+const LanguageEdit = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
 
-	const { data } = moneyServices.useMoneyGetByIdQuery({
-		money_id: id,
+	const { data } = languageServices.useLanguageGetByIdQuery({
+		language_id: id,
 	});
-	const { useMoneyEditMutation } = moneyServices;
+	const { useLanguageEditMutation } = languageServices;
 
-	const [moneyEdit] = useMoneyEditMutation();
+	const [languageEdit] = useLanguageEditMutation();
 
 	const updateMoney = React.useCallback(
 		(values) => {
 			const updateData = {
-				money_id: id,
+				language_id: id,
 				...values,
 			};
 
@@ -38,13 +38,13 @@ const MoneyEdit = () => {
 				updateData.status = false;
 			}
 
-			moneyEdit(updateData)
+			languageEdit(updateData)
 				.unwrap()
 				.then(() => {
-					navigate('/money/list');
+					navigate('/language/list');
 				});
 		},
-		[navigate, id, moneyEdit],
+		[navigate, id, languageEdit],
 	);
 
 	const formik = useFormik({
@@ -57,7 +57,7 @@ const MoneyEdit = () => {
 		onSubmit: (values) => {
 			console.log(values);
 			updateMoney(values);
-			navigate('/money/list');
+			navigate('/language/list');
 		},
 	});
 
@@ -139,4 +139,4 @@ const MoneyEdit = () => {
 	);
 };
 
-export default MoneyEdit;
+export default LanguageEdit;
