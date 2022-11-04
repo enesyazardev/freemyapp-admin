@@ -2,17 +2,17 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
 import Wrapper from '../../layouts/Wrapper';
-import { moneyServices } from '../../services';
+import { languageServices } from '../../services';
 
-const MoneyList = () => {
-	const { data } = moneyServices.useMoneyListQuery();
+const LanguageList = () => {
+	const { data } = languageServices.useLanguageListQuery();
 	const [query, setQuery] = React.useState('');
 	const [pageNumber, setPageNumber] = React.useState(0);
 
-	const moneyPerPage = 10;
-	const pagesVisited = pageNumber * moneyPerPage;
+	const languagePerPage = 10;
+	const pagesVisited = pageNumber * languagePerPage;
 
-	const pageCount = Math.ceil(data?.stats?.total / moneyPerPage);
+	const pageCount = Math.ceil(data?.stats?.total / languagePerPage);
 
 	const changePage = ({ selected }) => {
 		setPageNumber(selected);
@@ -22,12 +22,12 @@ const MoneyList = () => {
 		<Wrapper>
 			<div className='row'>
 				<div className='col-12'>
-					<Link to='/money/create' className='btn btn-primary mb-3'>
+					<Link to='/language/create' className='btn btn-primary mb-3'>
 						Create
 					</Link>
 					<div className='card'>
 						<div className='card-header'>
-							<h3 className='card-title'>Money List</h3>
+							<h3 className='card-title'>Language List</h3>
 							<div className='card-tools'>
 								<div className='input-group input-group-sm' style={{ width: 250 }}>
 									<input
@@ -50,7 +50,7 @@ const MoneyList = () => {
 							<table className='table table-bordered table-hover text-nowrap'>
 								<thead>
 									<tr>
-										<th>Money ID</th>
+										<th>Language ID</th>
 										<th>Title</th>
 										<th>Status</th>
 										<th>Actions</th>
@@ -59,14 +59,13 @@ const MoneyList = () => {
 								<tbody>
 									{data?.data?.length > 0 ? (
 										data?.data
-											?.filter((money) =>
-												money.title.toLowerCase().includes(query.trim()),
+											?.filter((lang) =>
+												lang?.title?.toLowerCase().includes(query.trim()),
 											)
-											.slice(pagesVisited, pagesVisited + moneyPerPage)
-
+											.slice(pagesVisited, pagesVisited + languagePerPage)
 											.map((d) => (
 												<tr key={d?._id}>
-													<td>{d?.money_id}</td>
+													<td>{d?.language_id}</td>
 													<td>{d?.title}</td>
 													<td>
 														{d?.status === true ? (
@@ -85,7 +84,7 @@ const MoneyList = () => {
 													</td>
 													<td>
 														<Link
-															to={`/money/edit/${d?.money_id}`}
+															to={`/language/edit/${d?.language_id}`}
 															className='btn btn-warning'>
 															Edit
 														</Link>
@@ -157,4 +156,4 @@ const MoneyList = () => {
 	);
 };
 
-export default MoneyList;
+export default LanguageList;

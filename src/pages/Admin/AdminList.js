@@ -3,12 +3,11 @@ import Wrapper from '../../layouts/Wrapper';
 import { adminServices } from '../../services';
 
 const AdminList = () => {
-	const { data, isLoading } = adminServices.useAdminListQuery({
-		search: '',
+	const { data } = adminServices.useAdminListQuery({
 		skip: 0,
 		limit: 0,
 	});
-	console.log(data, isLoading);
+	console.log(data);
 	return (
 		<Wrapper>
 			<div className='row'>
@@ -46,8 +45,8 @@ const AdminList = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{data?.length > 0 ? (
-										data?.map((d) => (
+									{data?.data?.length > 0 ? (
+										data?.data?.map((d) => (
 											<tr key={d?._id}>
 												<td>{d?.full_name}</td>
 												<td>{d?.email}</td>

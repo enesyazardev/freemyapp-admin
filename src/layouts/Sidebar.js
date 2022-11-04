@@ -77,6 +77,18 @@ const Sidebar = () => {
 								<p>Money Management</p>
 							</Link>
 						</li>
+						<li className='nav-item'>
+							<Link
+								to='/language/list'
+								className={
+									routePath.pathname === '/language/list'
+										? 'nav-link active'
+										: 'nav-link'
+								}>
+								<i className='nav-icon fas fa-language' />
+								<p>Language Management</p>
+							</Link>
+						</li>
 					</ul>
 				</nav>
 				{/* /.sidebar-menu */}
