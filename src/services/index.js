@@ -4,3 +4,4 @@ export { default as authService } from './authService';
 export { default as adminServices } from './adminServices';
 export { default as moneyServices } from './moneyServices';
 export { default as languageServices } from './languageServices';
+export { default as countryServices } from './countryServices';

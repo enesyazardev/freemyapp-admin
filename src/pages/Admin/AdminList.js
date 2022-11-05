@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import Wrapper from '../../layouts/Wrapper';
 import { adminServices } from '../../services';
+import Skeleton from 'react-loading-skeleton';
 
 const AdminList = () => {
-	const { data } = adminServices.useAdminListQuery({
+	const { data, isLoading } = adminServices.useAdminListQuery({
 		skip: 0,
 		limit: 0,
 	});
-	console.log(data);
 	return (
 		<Wrapper>
 			<div className='row'>
@@ -45,7 +45,16 @@ const AdminList = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{data?.data?.length > 0 ? (
+									{!isLoading && data?.data?.length === 0 ? (
+										<tr>
+											<td colSpan={3} align='center'>
+												NOT FOUND
+											</td>
+										</tr>
+									) : (
+										''
+									)}
+									{!isLoading ? (
 										data?.data?.map((d) => (
 											<tr key={d?._id}>
 												<td>{d?.full_name}</td>
@@ -62,7 +71,7 @@ const AdminList = () => {
 									) : (
 										<tr>
 											<td colSpan={3} align='center'>
-												NOT FOUND
+												<Skeleton count={3} />
 											</td>
 										</tr>
 									)}
