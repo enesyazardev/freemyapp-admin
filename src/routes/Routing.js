@@ -8,6 +8,7 @@ const Auth = React.lazy(() => import('../pages/Auth/Auth'));
 const Dashboard = React.lazy(() => import('../pages/Dashboard/Dashboard'));
 const AdminList = React.lazy(() => import('../pages/Admin/AdminList'));
 const AdminCreate = React.lazy(() => import('../pages/Admin/AdminCreate'));
+const AdminEdit = React.lazy(() => import('../pages/Admin/AdminEdit'));
 const MoneyList = React.lazy(() => import('../pages/Money/MoneyList'));
 const MoneyCreate = React.lazy(() => import('../pages/Money/MoneyCreate'));
 const MoneyEdit = React.lazy(() => import('../pages/Money/MoneyEdit'));
@@ -43,6 +44,14 @@ const Routing = () => {
 						element={
 							<Private>
 								<AdminCreate />
+							</Private>
+						}
+					/>
+					<Route
+						path='admin/edit/:id'
+						element={
+							<Private>
+								<AdminEdit />
 							</Private>
 						}
 					/>

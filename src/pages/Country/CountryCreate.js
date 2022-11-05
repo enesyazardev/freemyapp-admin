@@ -18,7 +18,7 @@ const CountryCreate = () => {
 			title: '',
 			language_id: '',
 		},
-		validationSchema: validations.language.create,
+		validationSchema: validations.country.create,
 		onSubmit: (values) => {
 			console.log(values);
 
@@ -81,12 +81,17 @@ const CountryCreate = () => {
 								</button>
 							</div>
 
-							{formik.errors.title ? (
+							{formik.errors.title || formik.errors.language_id ? (
 								<div
 									className='alert alert-danger mt-3 alert-dismissible fade show'
 									role='alert'>
 									<ul>
 										{formik.errors.title ? <li>{formik.errors.title}</li> : ''}
+										{formik.errors.language_id ? (
+											<li>{formik.errors.language_id}</li>
+										) : (
+											''
+										)}
 									</ul>
 								</div>
 							) : (
