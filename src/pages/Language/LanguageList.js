@@ -1,11 +1,12 @@
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 import ReactPaginate from 'react-paginate';
 import { Link } from 'react-router-dom';
 import Wrapper from '../../layouts/Wrapper';
 import { languageServices } from '../../services';
 
 const LanguageList = () => {
-	const { data } = languageServices.useLanguageListQuery();
+	const { data, isLoading } = languageServices.useLanguageListQuery();
 	const [query, setQuery] = React.useState('');
 	const [pageNumber, setPageNumber] = React.useState(0);
 
@@ -57,7 +58,16 @@ const LanguageList = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{data?.data?.length > 0 ? (
+									{!isLoading && data?.data?.length === 0 ? (
+										<tr>
+											<td colSpan={3} align='center'>
+												NOT FOUND
+											</td>
+										</tr>
+									) : (
+										''
+									)}
+									{!isLoading ? (
 										data?.data
 											?.filter((lang) =>
 												lang?.title?.toLowerCase().includes(query.trim()),
@@ -93,8 +103,8 @@ const LanguageList = () => {
 											))
 									) : (
 										<tr>
-											<td colSpan={3} align='center'>
-												NOT FOUND
+											<td colSpan={4} align='center'>
+												<Skeleton count={4} />
 											</td>
 										</tr>
 									)}

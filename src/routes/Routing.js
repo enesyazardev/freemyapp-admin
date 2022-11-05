@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PageLoading from '../components/PageLoading';
 import Private from './Private';
 import Public from './Public';
 
@@ -13,11 +14,13 @@ const MoneyEdit = React.lazy(() => import('../pages/Money/MoneyEdit'));
 const LanguageList = React.lazy(() => import('../pages/Language/LanguageList'));
 const LanguageCreate = React.lazy(() => import('../pages/Language/LanguageCreate'));
 const LanguageEdit = React.lazy(() => import('../pages/Language/LanguageEdit'));
+const CountryList = React.lazy(() => import('../pages/Country/CountryList'));
+const CountryCreate = React.lazy(() => import('../pages/Country/CountryCreate'));
 
 const Routing = () => {
 	return (
 		<BrowserRouter>
-			<React.Suspense fallback={<div>loading...</div>}>
+			<React.Suspense fallback={<PageLoading />}>
 				<Routes>
 					<Route
 						path='/'
@@ -88,6 +91,22 @@ const Routing = () => {
 						element={
 							<Private>
 								<LanguageEdit />
+							</Private>
+						}
+					/>
+					<Route
+						path='country/list'
+						element={
+							<Private>
+								<CountryList />
+							</Private>
+						}
+					/>
+					<Route
+						path='country/create'
+						element={
+							<Private>
+								<CountryCreate />
 							</Private>
 						}
 					/>
