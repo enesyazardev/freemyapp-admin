@@ -33,9 +33,18 @@ const adminServices = baseApi.injectEndpoints({
 			invalidatesTags: () => ['adminGet'],
 		}),
 
-		/* agencyEdit: build.mutation({
+		adminGetById: build.query({
 			query: (body) => ({
-				url: '/agency/edit',
+				url: '/admin/get',
+				method: 'POST',
+				body,
+			}),
+			transformResponse: baseApi.defaultTransformResponse,
+		}),
+
+		adminEdit: build.mutation({
+			query: (body) => ({
+				url: '/admin/edit',
 				method: 'POST',
 				body,
 			}),
@@ -45,59 +54,18 @@ const adminServices = baseApi.injectEndpoints({
 				queryFulfilled.then(() => {
 					dispatch(baseApi.util.resetApiState());
 					toast(
-						i18n.t('serviceToastMessage.success.agencyUpdate'),
-						i18n.t('serviceToastMessage.success.agencyUpdate'),
+						'Admin Updated is Successfully!',
+						'Admin Updated is Successfully!',
 						'success',
 					);
 				});
 
 				queryFulfilled.catch((error) => {
-					toast(
-						i18n.t('serviceToastMessage.error.agencyUpdate'),
-						responseError(error.error).desc,
-						'danger',
-					);
+					toast('Failed to Update Admin!', responseError(error.error).desc, 'danger');
 				});
 			},
 			invalidatesTags: () => ['adminGet'],
 		}),
-
-		agencyDelete: build.mutation({
-			query: (body) => ({
-				url: '/agency/delete',
-				method: 'DELETE',
-				body,
-			}),
-
-			transformResponse: baseApi.defaultTransformResponse,
-			onQueryStarted(body, { queryFulfilled }) {
-				queryFulfilled.then(() => {
-					toast(
-						i18n.t('serviceToastMessage.success.agencyDelete'),
-						i18n.t('serviceToastMessage.success.agencyDelete'),
-						'success',
-					);
-				});
-
-				queryFulfilled.catch((error) => {
-					toast(
-						i18n.t('serviceToastMessage.error.agencyDelete'),
-						responseError(error.error).desc,
-						'danger',
-					);
-				});
-			},
-			invalidatesTags: () => ['adminGet'],
-		}),
-
-		adminGetById: build.query({
-			query: (body) => ({
-				url: '/agency/get',
-				method: 'POST',
-				body,
-			}),
-			transformResponse: baseApi.defaultTransformResponse,
-		}),  */
 	}),
 });
 export default adminServices;

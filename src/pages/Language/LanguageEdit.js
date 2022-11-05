@@ -71,7 +71,7 @@ const LanguageEdit = () => {
 
 					<div className='card card-primary'>
 						<div className='card-header'>
-							<h3 className='card-title'>Money Edit</h3>
+							<h3 className='card-title'>Language Edit</h3>
 						</div>
 						{/* /.card-header */}
 						{/* form start */}

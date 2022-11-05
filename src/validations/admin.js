@@ -10,4 +10,13 @@ const create = Yup.object().shape({
 	isRoot: Yup.array().required('Is Root is required'),
 });
 
-export default { create };
+const edit = Yup.object().shape({
+	full_name: Yup.string()
+		.required('Full Name is required')
+		.min(3, 'Full Name enter a minimum of 3!'),
+	// password: Yup.string().required('Password is required').min(6, 'You can enter a minimum of 6!'),
+	status: Yup.string().required('Status is required'),
+	isRoot: Yup.string().required('Is Root is required'),
+});
+
+export default { create, edit };

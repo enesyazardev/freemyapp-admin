@@ -41,13 +41,15 @@ const AdminList = () => {
 									<tr>
 										<th>Full Name</th>
 										<th>Email</th>
+										<th>Status</th>
+										<th>Is Root</th>
 										<th>Actions</th>
 									</tr>
 								</thead>
 								<tbody>
 									{!isLoading && data?.data?.length === 0 ? (
 										<tr>
-											<td colSpan={3} align='center'>
+											<td colSpan={5} align='center'>
 												NOT FOUND
 											</td>
 										</tr>
@@ -60,18 +62,50 @@ const AdminList = () => {
 												<td>{d?.full_name}</td>
 												<td>{d?.email}</td>
 												<td>
-													<a
-														href={`/admin/edit/${d?._id}`}
+													{d?.status === true ? (
+														<h5>
+															<span className='badge badge-pill badge-success'>
+																True
+															</span>
+														</h5>
+													) : (
+														<h5>
+															<span className='badge badge-pill badge-danger'>
+																False
+															</span>
+														</h5>
+													)}
+												</td>
+
+												<td>
+													{d?.isRoot === true ? (
+														<h5>
+															<span className='badge badge-pill badge-success'>
+																True
+															</span>
+														</h5>
+													) : (
+														<h5>
+															<span className='badge badge-pill badge-danger'>
+																False
+															</span>
+														</h5>
+													)}
+												</td>
+
+												<td>
+													<Link
+														to={`/admin/edit/${d?.user_id}`}
 														className='btn btn-warning'>
 														Edit
-													</a>
+													</Link>
 												</td>
 											</tr>
 										))
 									) : (
 										<tr>
-											<td colSpan={3} align='center'>
-												<Skeleton count={3} />
+											<td colSpan={5} align='center'>
+												<Skeleton count={5} />
 											</td>
 										</tr>
 									)}
