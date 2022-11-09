@@ -62,7 +62,7 @@ const CountryList = () => {
 								<tbody>
 									{!isLoading && data?.data?.length === 0 ? (
 										<tr>
-											<td colSpan={3} align='center'>
+											<td colSpan={5} align='center'>
 												NOT FOUND
 											</td>
 										</tr>
@@ -115,8 +115,8 @@ const CountryList = () => {
 											))
 									) : (
 										<tr>
-											<td colSpan={3} align='center'>
-												<Skeleton count={3} />
+											<td colSpan={5} align='center'>
+												<Skeleton count={5} />
 											</td>
 										</tr>
 									)}

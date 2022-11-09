@@ -17,6 +17,8 @@ const LanguageCreate = React.lazy(() => import('../pages/Language/LanguageCreate
 const LanguageEdit = React.lazy(() => import('../pages/Language/LanguageEdit'));
 const CountryList = React.lazy(() => import('../pages/Country/CountryList'));
 const CountryCreate = React.lazy(() => import('../pages/Country/CountryCreate'));
+const CountryEdit = React.lazy(() => import('../pages/Country/CountryEdit'));
+const UserList = React.lazy(() => import('../pages/User/UserList'));
 
 const Routing = () => {
 	return (
@@ -116,6 +118,22 @@ const Routing = () => {
 						element={
 							<Private>
 								<CountryCreate />
+							</Private>
+						}
+					/>
+					<Route
+						path='country/edit/:id'
+						element={
+							<Private>
+								<CountryEdit />
+							</Private>
+						}
+					/>
+					<Route
+						path='user/list'
+						element={
+							<Private>
+								<UserList />
 							</Private>
 						}
 					/>

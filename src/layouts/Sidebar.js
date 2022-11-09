@@ -67,6 +67,18 @@ const Sidebar = () => {
 						</li>
 						<li className='nav-item'>
 							<Link
+								to='/user/list'
+								className={
+									routePath.pathname === '/user/list'
+										? 'nav-link active'
+										: 'nav-link'
+								}>
+								<i className='nav-icon fas fa-users' />
+								<p>User Management</p>
+							</Link>
+						</li>
+						<li className='nav-item'>
+							<Link
 								to='/money/list'
 								className={
 									routePath.pathname === '/money/list'
