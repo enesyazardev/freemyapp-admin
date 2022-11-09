@@ -23,7 +23,11 @@ const adminServices = baseApi.injectEndpoints({
 			transformResponse: baseApi.defaultTransformResponse,
 			onQueryStarted(body, { queryFulfilled }) {
 				queryFulfilled.then(() => {
-					toast('Admin Created is Successfully!', 'success');
+					toast(
+						'Admin Created is Successfully!',
+						'Admin Created is Successfully!',
+						'success',
+					);
 				});
 
 				queryFulfilled.catch((error) => {
