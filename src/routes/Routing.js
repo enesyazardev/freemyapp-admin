@@ -19,6 +19,7 @@ const CountryList = React.lazy(() => import('../pages/Country/CountryList'));
 const CountryCreate = React.lazy(() => import('../pages/Country/CountryCreate'));
 const CountryEdit = React.lazy(() => import('../pages/Country/CountryEdit'));
 const UserList = React.lazy(() => import('../pages/User/UserList'));
+const UserEdit = React.lazy(() => import('../pages/User/UserEdit'));
 
 const Routing = () => {
 	return (
@@ -134,6 +135,14 @@ const Routing = () => {
 						element={
 							<Private>
 								<UserList />
+							</Private>
+						}
+					/>
+					<Route
+						path='user/edit/:id'
+						element={
+							<Private>
+								<UserEdit />
 							</Private>
 						}
 					/>
