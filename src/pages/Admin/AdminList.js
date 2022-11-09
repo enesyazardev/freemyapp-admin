@@ -2,12 +2,23 @@ import { Link } from 'react-router-dom';
 import Wrapper from '../../layouts/Wrapper';
 import { adminServices } from '../../services';
 import Skeleton from 'react-loading-skeleton';
+import React from 'react';
+import ReactPaginate from 'react-paginate';
 
 const AdminList = () => {
+	const [page, setPage] = React.useState(0);
+	const limit = 10;
+	const [query, setQuery] = React.useState('');
+
 	const { data, isLoading } = adminServices.useAdminListQuery({
-		skip: 0,
-		limit: 0,
+		search: query,
+		skip: page * limit,
+		limit: limit,
 	});
+
+	const changePage = ({ selected }) => {
+		setPage(selected);
+	};
 	return (
 		<Wrapper>
 			<div className='row'>
@@ -25,6 +36,7 @@ const AdminList = () => {
 										name='table_search'
 										className='form-control float-right'
 										placeholder='Search'
+										onChange={(e) => setQuery(e.target.value)}
 									/>
 									<div className='input-group-append'>
 										<button type='submit' className='btn btn-default'>
@@ -111,34 +123,26 @@ const AdminList = () => {
 									)}
 								</tbody>
 							</table>
+
 							<div className='card-footer clearfix'>
-								<ul className='pagination pagination-sm m-0 float-right'>
-									<li className='page-item'>
-										<a className='page-link' href='#'>
-											«
-										</a>
-									</li>
-									<li className='page-item'>
-										<a className='page-link' href='#'>
-											1
-										</a>
-									</li>
-									<li className='page-item'>
-										<a className='page-link' href='#'>
-											2
-										</a>
-									</li>
-									<li className='page-item'>
-										<a className='page-link' href='#'>
-											3
-										</a>
-									</li>
-									<li className='page-item'>
-										<a className='page-link' href='#'>
-											»
-										</a>
-									</li>
-								</ul>
+								<ReactPaginate
+									className='pagination pagination-sm m-0 float-right'
+									previousLabel='<'
+									nextLabel='>'
+									breakLabel='...'
+									pageCount={data?.stats?.total / 10}
+									onPageChange={changePage}
+									containerClassName='pagination'
+									pageClassName='page-item'
+									pageLinkClassName='page-link'
+									previousClassName='page-item'
+									previousLinkClassName='page-link'
+									nextClassName='page-item'
+									nextLinkClassName='page-link'
+									breakClassName='page-item'
+									breakLinkClassName='page-link'
+									activeClassName='active'
+								/>
 							</div>
 						</div>
 						{/* /.card-body */}

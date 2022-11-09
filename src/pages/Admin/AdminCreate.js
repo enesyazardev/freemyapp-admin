@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import Wrapper from '../../layouts/Wrapper';
 import { adminServices } from '../../services';
 
@@ -6,6 +7,7 @@ import validations from '../../validations';
 
 const AdminCreate = () => {
 	const { useAdminCreateMutation } = adminServices;
+	const navigate = useNavigate();
 
 	const [adminCreate] = useAdminCreateMutation();
 
@@ -28,6 +30,7 @@ const AdminCreate = () => {
 				permissions: [],
 			};
 			adminCreate(obj);
+			navigate('/admin/list');
 		},
 	});
 
