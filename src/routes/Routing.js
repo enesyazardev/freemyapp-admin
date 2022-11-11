@@ -20,12 +20,14 @@ const CountryCreate = React.lazy(() => import('../pages/Country/CountryCreate'))
 const CountryEdit = React.lazy(() => import('../pages/Country/CountryEdit'));
 const UserList = React.lazy(() => import('../pages/User/UserList'));
 const UserEdit = React.lazy(() => import('../pages/User/UserEdit'));
+const PageNotFound = React.lazy(() => import('../components/PageNotFound'));
 
 const Routing = () => {
 	return (
 		<BrowserRouter>
 			<React.Suspense fallback={<PageLoading />}>
 				<Routes>
+					<Route path='*' element={<PageNotFound />} />
 					<Route
 						path='/'
 						element={
