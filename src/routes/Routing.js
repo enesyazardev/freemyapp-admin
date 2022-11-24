@@ -20,6 +20,8 @@ const CountryCreate = React.lazy(() => import('../pages/Country/CountryCreate'))
 const CountryEdit = React.lazy(() => import('../pages/Country/CountryEdit'));
 const UserList = React.lazy(() => import('../pages/User/UserList'));
 const UserEdit = React.lazy(() => import('../pages/User/UserEdit'));
+const FaqList = React.lazy(() => import('../pages/Faq/FaqList'));
+const FaqCreate = React.lazy(() => import('../pages/Faq/FaqCreate'));
 const PageNotFound = React.lazy(() => import('../components/PageNotFound'));
 
 const Routing = () => {
@@ -33,6 +35,22 @@ const Routing = () => {
 						element={
 							<Private>
 								<Dashboard />
+							</Private>
+						}
+					/>
+					<Route
+						path='faq/list'
+						element={
+							<Private>
+								<FaqList />
+							</Private>
+						}
+					/>
+					<Route
+						path='faq/create'
+						element={
+							<Private>
+								<FaqCreate />
 							</Private>
 						}
 					/>

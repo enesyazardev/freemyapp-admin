@@ -6,3 +6,4 @@ export { default as moneyServices } from './moneyServices';
 export { default as languageServices } from './languageServices';
 export { default as countryServices } from './countryServices';
 export { default as userServices } from './userServices';
+export { default as faqServices } from './faqServices';
