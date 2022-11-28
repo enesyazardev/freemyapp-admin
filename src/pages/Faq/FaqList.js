@@ -7,15 +7,19 @@ import { faqServices } from '../../services';
 
 const FaqList = () => {
 	const { data, isLoading } = faqServices.useFaqListQuery();
-	console.log(data);
+
+	// const faqData = data?.data?.map((d) => d.faq_data[Object.keys(d.faq_data)]).map((a) => a);
+	const faqData = data?.data?.map((d) => {
+		return { faq_id: d.faq_id, status: d.status, faq: d.faq_data[Object.keys(d.faq_data)] };
+	});
 
 	const [query, setQuery] = React.useState('');
 	const [pageNumber, setPageNumber] = React.useState(0);
 
-	const countryPerPage = 10;
-	const pagesVisited = pageNumber * countryPerPage;
+	const faqPerPage = 10;
+	const pagesVisited = pageNumber * faqPerPage;
 
-	const pageCount = Math.ceil(data?.stats?.total / countryPerPage);
+	const pageCount = Math.ceil(data?.stats?.total / faqPerPage);
 
 	const changePage = ({ selected }) => {
 		setPageNumber(selected);
@@ -53,17 +57,17 @@ const FaqList = () => {
 							<table className='table table-bordered table-hover text-nowrap'>
 								<thead>
 									<tr>
-										<th>Country ID</th>
-										<th>Title</th>
-										<th>Language</th>
+										<th>Faq ID</th>
+										<th>Question</th>
+										<th>Answer</th>
 										<th>Status</th>
 										<th>Actions</th>
 									</tr>
 								</thead>
 								<tbody>
-									{!isLoading && data?.data?.length === 0 ? (
+									{!isLoading && faqData.length === 0 ? (
 										<tr>
-											<td colSpan={5} align='center'>
+											<td colSpan={3} align='center'>
 												NOT FOUND
 											</td>
 										</tr>
@@ -71,25 +75,18 @@ const FaqList = () => {
 										''
 									)}
 									{!isLoading ? (
-										data?.data
-											?.filter((country) =>
-												country?.title
+										faqData
+											?.filter((faq) =>
+												faq?.faq?.answer
 													?.toLowerCase()
 													.includes(query.trim()),
 											)
-											.slice(pagesVisited, pagesVisited + countryPerPage)
+											.slice(pagesVisited, pagesVisited + faqPerPage)
 											.map((d) => (
 												<tr key={d?._id}>
-													<td>{d?.country_id}</td>
-													<td>{d?.title}</td>
-													<td>
-														{
-															data?.find(
-																(a) =>
-																	a.language_id === d.language_id,
-															)?.title
-														}
-													</td>
+													<td>{d?.faq_id}</td>
+													<td>{d?.faq?.question}</td>
+													<td>{d?.faq?.answer}</td>
 													<td>
 														{d?.status === true ? (
 															<h5>
@@ -107,7 +104,7 @@ const FaqList = () => {
 													</td>
 													<td>
 														<Link
-															to={`/country/edit/${d?.country_id}`}
+															to={`/faq/edit/${d?.faq_id}`}
 															className='btn btn-warning'>
 															Edit
 														</Link>
@@ -116,8 +113,8 @@ const FaqList = () => {
 											))
 									) : (
 										<tr>
-											<td colSpan={5} align='center'>
-												<Skeleton count={5} />
+											<td colSpan={3} align='center'>
+												<Skeleton count={3} />
 											</td>
 										</tr>
 									)}

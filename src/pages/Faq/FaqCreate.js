@@ -97,14 +97,18 @@ const FaqCreate = () => {
 								</button>
 							</div>
 
-							{formik.errors.title || formik.errors.language_id ? (
+							{formik.errors.question || formik.errors.answer ? (
 								<div
 									className='alert alert-danger mt-3 alert-dismissible fade show'
 									role='alert'>
 									<ul>
-										{formik.errors.title ? <li>{formik.errors.title}</li> : ''}
-										{formik.errors.language_id ? (
-											<li>{formik.errors.language_id}</li>
+										{formik.errors.question ? (
+											<li>{formik.errors.question}</li>
+										) : (
+											''
+										)}
+										{formik.errors.answer ? (
+											<li>{formik.errors.answer}</li>
 										) : (
 											''
 										)}

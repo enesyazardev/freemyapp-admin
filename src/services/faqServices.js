@@ -36,7 +36,7 @@ const faqServices = baseApi.injectEndpoints({
 			invalidatesTags: () => ['faqGet'],
 		}),
 
-		/* faqGetById: build.query({
+		faqGetById: build.query({
 			query: (body) => ({
 				url: '/faq/get',
 				method: 'POST',
@@ -68,7 +68,7 @@ const faqServices = baseApi.injectEndpoints({
 				});
 			},
 			invalidatesTags: () => ['faqGet'],
-		}), */
+		}),
 	}),
 });
 export default faqServices;
