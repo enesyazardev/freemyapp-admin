@@ -113,6 +113,18 @@ const Sidebar = () => {
 								<p>Country Management</p>
 							</Link>
 						</li>
+						<li className='nav-item'>
+							<Link
+								to='/faq/list'
+								className={
+									routePath.pathname === '/faq/list'
+										? 'nav-link active'
+										: 'nav-link'
+								}>
+								<i className='nav-icon fas fa-question-circle' />
+								<p>FAQ Management</p>
+							</Link>
+						</li>
 					</ul>
 				</nav>
 				{/* /.sidebar-menu */}
